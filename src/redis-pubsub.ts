@@ -66,7 +66,7 @@ export class RedisPubSub implements PubSubEngine {
     } else {
       return new Promise<number>((resolve, reject) => {
         // TODO Support for pattern subs
-        this.redisSubscriber.subscribe(triggerName, err => {
+        this.redisSubscriber.psubscribe(triggerName, err => {
           if (err) {
             reject(err);
           } else {
