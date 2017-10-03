@@ -29,7 +29,7 @@ var RedisPubSub = (function () {
                 console.error("Nor publisher or subscriber instances were provided and the package 'ioredis' wasn't found. \n        Couldn't create Redis clients.");
             }
         }
-        this.redisSubscriber.on('message', this.onMessage.bind(this));
+        this.redisSubscriber.on('pmessage', this.onMessage.bind(this));
         this.subscriptionMap = {};
         this.subsRefsMap = {};
         this.currentSubscriptionId = 0;
@@ -87,8 +87,8 @@ var RedisPubSub = (function () {
     RedisPubSub.prototype.getPublisher = function () {
         return this.redisPublisher;
     };
-    RedisPubSub.prototype.onMessage = function (channel, message) {
-        var subscribers = this.subsRefsMap[channel];
+    RedisPubSub.prototype.onMessage = function (pattern, channel, message) {
+        var subscribers = this.subsRefsMap[pattern];
         if (!subscribers || !subscribers.length)
             return;
         var parsedMessage;

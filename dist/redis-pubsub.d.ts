@@ -16,7 +16,7 @@ export declare class RedisPubSub implements PubSubEngine {
     asyncIterator<T>(triggers: string | string[]): AsyncIterator<T>;
     getSubscriber(): RedisClient;
     getPublisher(): RedisClient;
-    private onMessage(channel, message);
+    private onMessage(pattern, channel, message);
     private triggerTransform;
     private redisSubscriber;
     private redisPublisher;
